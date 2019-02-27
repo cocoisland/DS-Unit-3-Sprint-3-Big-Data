@@ -89,7 +89,7 @@ First, read [_Spark: The Definitive Guide_ excerpts](https://pages.databricks.co
 Then, in your notebook, do the [code exercises from _Spark: The Definitive Guide_, **Chapter 2: A Gentle Introduction to Spark**](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/code/A_Gentle_Introduction_to_Spark-Chapter_2_A_Gentle_Introduction_to_Spark.scala).
 
 **Important!** Note these instructions from the [repo README](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/README.md):
-> Rather than you having to upload all of the data yourself, you simply have to **change the path in each chapter from `/data` to `/databricks-datasets/definitive-guide/data`**. Once you've done that, all examples should run without issue. 
+> Rather than you having to upload all of the data yourself, you simply have to **change the path in each chapter from `/data` to `/databricks-datasets/definitive-guide/data/flight-data/csv/2015-summary.csv`**. Once you've done that, all examples should run without issue. 
 
 Next, read [_Spark: The Definitive Guide_ excerpts](https://pages.databricks.com/rs/094-YMS-629/images/Apache-Spark-The-Definitive-Guide-Excerpts-R1.pdf), **Pages 22-31.**
 
