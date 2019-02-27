@@ -36,7 +36,49 @@ In your notebook, run the Pi Estimation example (in Scala) from the [Apache Spar
 
 (First you'll need to assign an integer value to the `NUM_SAMPLES` constant.)
 
+```scala
+  val NUM_SAMPLES = math.pow(10,7).toInt
+
+  val count = sc.parallelize(1 to NUM_SAMPLES).filter{ _ =>
+  val x = math.random
+  val y = math.random
+  x*x + y*y < 1
+}.count()
+println(s"Pi is rough ${4.0 * count/NUM_SAMPLES}")
+```
+```scala
+Pi is rough 3.1406896
+count: Long = 7851724
+Command took 6.24 seconds -- by ttony10101@gmail.com at 2/27/2019, 1:20:13 PM on scala_c2
+```
+
 How does the code compare to the `monte_carlo_pi` example on [Numba's homepage](http://numba.pydata.org/)?
+import random
+
+```python
+from numba import njit
+@njit
+def monte_carlo_pi(nsamples):
+    acc = 0
+    for _ in range(int(nsamples)):
+        x = random.random()
+        y = random.random()
+        if (x**2 + y**2) < 1.0:
+            acc += 1
+    return 4.0 * acc / nsamples
+    
+%%time
+monte_carlo_pi(1e7)
+```
+
+```python
+CPU times: user 283 ms, sys: 13.3 ms, total: 296 ms
+Wall time: 1.44 s
+Out[9]:
+3.1412544
+
+```
+
 
 (Regarding the performance: Note that [Databricks Community Edition](https://databricks.com/try-databricks) is a "Single cluster limited to 6GB and no worker nodes.")
 
