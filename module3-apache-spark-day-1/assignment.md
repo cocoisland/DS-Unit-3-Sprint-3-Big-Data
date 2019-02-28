@@ -84,6 +84,9 @@ Out[9]:
 
 ### 6. Do exercises from _Spark: The Definitive Guide_
 
+#### Use nbviewer.jupyter.org to view the html file.
+[html viewer](https://nbviewer.jupyter.org)
+
 First, read [_Spark: The Definitive Guide_ excerpts](https://pages.databricks.com/rs/094-YMS-629/images/Apache-Spark-The-Definitive-Guide-Excerpts-R1.pdf), **Pages 1-21.**
 
 Then, in your notebook, do the [code exercises from _Spark: The Definitive Guide_, **Chapter 2: A Gentle Introduction to Spark**](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/code/A_Gentle_Introduction_to_Spark-Chapter_2_A_Gentle_Introduction_to_Spark.scala).
