@@ -1,0 +1,11 @@
+#### AWS SageMaker - interactive repl notebook with options to scale up processing power. Ideal for crunching large volume of data.
+1. Dask dataframe API enables parallel processing which works well with AWS SageMaker multi-core scale up processing.
+2. Numba is a high performance Just-In-Time compiler which speeds up high computation processing.
+
+#### AWS EMR - is a layer running above map-reduce spark operating system. User has a choice of Scala or python to work. 
+
+#### Databricks - is similar to AWS EMR, another system running onto spark.
+
+#### AWS SageMaker offers easy quick scale out and scale up options if needed, but cost expensive.
+#### AWS EMR offers a low-cost computing options for processing large volume of data.
+
