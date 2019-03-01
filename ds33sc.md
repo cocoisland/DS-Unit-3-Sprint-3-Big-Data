@@ -14,25 +14,26 @@ Start an Amazon SageMaker Notebook instance. (Any instance type is ok. This can 
 
 ## Solution:
 Load the five csv files into one Dask Dataframe. It should have a length of 1956 rows, and 5 columns.
-<
+```dask
+
 import dask.dataframe as dd
 
 df = dd.read_csv('Youtube*.csv')
 len(df), len(df.columns)
-(1956, 5)
->
+(1956, 5) 
+```
 
 Use the Dask Dataframe to compute the counts of spam (1005 comments) versus the counts of legitimate comments (951).
-<
+```dask
 df['CLASS'].value_counts().compute()
 Out[2]:
 1    1005
 0     951
 Name: CLASS, dtype: int64
->
+```
 
 Spammers often tell people to check out their stuff! When the comments are converted to lowercase, then spam comments contain the word "check" 461 times, and legitimate comments contain the word "check" just 19 times. Use the Dask Dataframe to compute these counts.
-<
+```dask
 df['CONTENT'] = df['CONTENT'].str.lower()
 In [4]:
 spam = df[df['CLASS'] == 1]
@@ -50,7 +51,7 @@ Out[5]:
 False    932
 True      19
 Name: CONTENT, dtype: int64
->
+```
 
 ### Terminal
 In the Jupyter dashboard, choose **New**, and then choose **Terminal.**
