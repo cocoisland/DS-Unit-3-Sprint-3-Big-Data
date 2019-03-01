@@ -69,3 +69,4 @@ spark.sql("""
   ORDER BY (`2015 median sales price`) asc
   LIMIT 10
 """).show()
+
