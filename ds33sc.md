@@ -128,11 +128,65 @@ For this part, sign in to [Databricks Community Edition](https://community.cloud
 
 ### Sum of squares
 If we list all the square numbers below 100, we get 1, 4, 9, 16, 25, 36, 49, 64, 81. The sum of these squares is 285.
-
+```scala
+val bound = 100
+(0 to bound)  // Not efficient but it's ok!
+.map(x => x * x)
+.filter(_ < bound)
+.reduce(_ + _)
+bound: Int = 100
+res29: Int = 285
+```
 Write Scala code to find the sum of all the square numbers below 1000.
+```scala
+val bound = 1000
+(0 to bound)  // Not efficient but it's ok!
+.map(x => x * x)
+.filter(_ < bound)
+.reduce(_ + _)
+bound: Int = 1000
+res30: Int = 10416
+```
 
 ### Optional bonus
 To score a 3, write a Scala program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz.” For numbers which are multiples of both three and five print “FizzBuzz.”
+```scala
+def fizzbuzz(n: Int) = {
+  if (n % 15 == 0)
+    println("FizzBuzz")
+  else if (n % 3 == 0)
+    println("Fizz")
+  else if (n % 5 == 0)
+    println("Buzz")
+  else
+    println(n)
+}
+
+val range = 1 to 100
+range.foreach(fizzbuzz)
+
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz
+Fizz
+```
 
 
 # Part 4. Spark SQL / DataFrame API
@@ -142,26 +196,70 @@ In this part, you'll work with data that compares city population versus median 
 /databricks-datasets/samples/population-vs-price/data_geo.csv
 ```
 
+  
 Load the data into a Spark dataframe. Infer the schema and include the header.
-
+```scala
+val df = spark
+  .read
+  .option("inferSchema", "true")
+  .option("header", "true")
+  .csv("/databricks-datasets/samples/population-vs-price/data_geo.csv")
+  ```
 Write code to show the dataframe has 294 rows and 6 columns.
+```scala
+(df.count(), df.columns.size)
+res33: (Long, Int) = (294,6)
+```
 
 Drop rows containing any null values. For example, if you named your dataframe `df`, you could use code like this:
 ```
 val df2 = df.na.drop()
 ```
 
+
 (I'm giving you this code now because I didn't teach this method earlier in the week, but it's mentioned in documentation: http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.Dataset@na:org.apache.spark.sql.DataFrameNaFunctions )
 
 Write code to show the cleaned dataframe has 109 rows, after dropping rows with null values.
 
+```scala
+df2.count()
+res35: Long = 109
+
+display(df2)
+
+```
 The cleaned dataframe has 1 city for the state of Utah. Display the name of the city, using either Spark SQL or the DataFrame API.
+```scala
+df2.createOrReplaceTempView("data")
+
+display(spark.sql("""
+SELECT *
+FROM data
+WHERE State = 'Utah'
+"""))
+```
 
 Sort the cleaned dataframe by 2015 median sales price (either ascending or descending), using either Spark SQL or the DataFrame API. Your results will display that San Jose, California was most expensive in this dataset ($900,000) and Rockford, Illinois was least expensive ($78,600). 
 
 (With Spark SQL, you can surround column names with backtick characters. This is useful when column names contain spaces or special characters.)
+```scala
+
+display(spark.sql("""
+SELECT *
+FROM data 
+ORDER BY `2015 median sales price` DESC
+"""))
+```
+
 
 (If you want, you can also display a map with this query. Go to https://docs.databricks.com/user-guide/visualizations/index.html#visualization-types for the documentation. For chart type, choose Map. For Plot Options, choose Keys: State Code, Values: 2015 median sales price, Aggregation: AVG.)
+```scala
+display(spark.sql("""
+SELECT *
+FROM data 
+ORDER BY `2015 median sales price` DESC
+"""))
+```
 
 ### Optional bonus
 To score a 3, do the questions for the cleaned dataframe both with Spark SQL *and* the DataFrame API.
